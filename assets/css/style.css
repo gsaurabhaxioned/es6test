@@ -169,6 +169,14 @@ button {
   font-weight: bold;
 }
 
+.hide {
+  display: none;
+}
+
+.show {
+  display: block;
+}
+
 
 
 /*=================================
