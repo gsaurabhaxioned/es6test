@@ -49,40 +49,71 @@ const start = document.querySelector(".start_btn"),
 submit = document.querySelector(".submit_btn"),
 previous = document.querySelector(".previous_btn"),
 next = document.querySelector(".next_btn"),
-back = document.querySelector(".back_btn"),
+back = document.querySelector(".previous_btn"),
 question_box = document.querySelector(".question_box"),
 options_box = document.querySelector(".options_box"),
+question_no = document.querySelector(".question-no"),
 question_container = document.querySelector(".questions"),
 result = document.querySelector(".result_box");
 
 let question_counter = 0; 
 
-const startQuestions = () => {
-    options_box.innerHTML = "";
-    let option1 = document.createElement('span'),
-    optiontext1 = document.createTextNode(questions[question_counter].options[0]),
-    option2 = document.createElement('span'),
-    optiontext2 = document.createTextNode(questions[question_counter].options[1]),
-    option3 = document.createElement('span'),
-    optiontext3 = document.createTextNode(questions[question_counter].options[2]),
-    option4 = document.createElement('span'),
-    optiontext4 = document.createTextNode(questions[question_counter].options[3]);
-    option1.appendChild(optiontext1);
-    option2.appendChild(optiontext2);
-    option3.appendChild(optiontext3);
-    option4.appendChild(optiontext4);
-    options_box.appendChild(option1);
-    options_box.appendChild(option2);
-    options_box.appendChild(option3);
-    options_box.appendChild(option4);
-    question_box.innerHTML = `${questions[question_counter].question}`; 
+const setAttributes = (element, attribute) => {
+    Object.keys(attribute).forEach(e => {
+        element.setAttribute(e, attribute[e]);
+    });
 }
 
-start.addEventListener("click",()=>{
-    start.classList.add("hide");
-    startQuestions();
-    // startCounter();
+const showQuestion = () => {
+    options_box.innerHTML = "";
+    let createOption = (counter) => {
+        let input = document.createElement("input");
+        let label = document.createElement("label");
+        label.setAttribute("for", `option${counter+1}`);
+        label.innerHTML = questions[question_counter].options[counter];
+        input_attributes = {
+            type: "radio",
+            name: "select",
+            id: `option${counter+1}`,
+            class: "option",
+            value: questions[question_counter].options[counter]
+        }
+        setAttributes(input, input_attributes);
+        options_box.appendChild(input);
+        options_box.appendChild(label);
+        input.classList.add("hide");
+   
+
+    }
+    for(let i = 0; i < questions[question_counter].options.length; i++) {
+        createOption(i);
+    }
+
+    question_box.innerHTML = `${questions[question_counter].question}`; 
+    question_no.innerHTML = `${question_counter+1}/10`
+}
+
+const nextQuestion = () => {
+    question_counter++;
+    showQuestion();
+}
+
+const prevQuestion = () => {
+    question_counter--;
+    showQuestion();
+}
+
+next.addEventListener("click",()=>{
+    nextQuestion();
 })
+
+back.addEventListener("click",()=>{
+    prevQuestion();
+})
+
+window.onload = () =>{
+    showQuestion();
+}
 
 
 
