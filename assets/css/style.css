@@ -215,6 +215,7 @@ button:disabled {
 
 .result-heading {
   margin-bottom: 10px;
+  color: #800080;
   font-size: 30px;
 }
 
