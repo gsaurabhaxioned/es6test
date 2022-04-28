@@ -46,6 +46,7 @@ let questions = [
 let answers = [];
 
 const start = document.querySelector(".start_btn"),
+start_info = document.querySelector(".start-info"),
 submit = document.querySelector(".submit_btn"),
 previous = document.querySelector(".previous_btn"),
 next = document.querySelector(".next_btn"),
@@ -75,7 +76,7 @@ const setAttributes = (element, attribute) => {
 
 const stop_timer = () => {
     if(!(localStorage.getItem("submitted"))){
-    finalResult();
+    finalResult("Time Up!!!!!!!!!!");
     }
 }
 
@@ -135,7 +136,7 @@ const checkAttemped = () => {
 
 }
 
-const finalResult = () => {
+const finalResult = (msg) => {
     question_container.classList.add("hide");
     result.classList.add("show");
     let score_count = 0;
@@ -147,7 +148,7 @@ const finalResult = () => {
         })
         
     })
-    score.innerText = `Your Score is : ${(score_count * 100)/questions.length}`;
+    score.innerText = `Your Score is : ${(score_count * 100)/questions.length} %`;
     total.innerText = `Total questions : ${questions.length}`;
     attemtps.innerText = `Questions_attempted: ${answers.length}`;
     correct_answers.innerText= `Correct Answers: ${score_count}`;
@@ -193,6 +194,7 @@ prev.addEventListener("click",()=>{
 
 start.addEventListener("click",()=>{
     start.classList.add("hide");
+    start_info.classList.add("hide");
     next.disabled = false;
     radioButtons(false);
    let time_duration = setInterval(()=>{
@@ -203,6 +205,7 @@ start.addEventListener("click",()=>{
    },1000);
    time_duration;
    setTimeout(() => {
+    timer.classList.add("hide");
     stop_timer();
 },4000);
   
@@ -211,6 +214,7 @@ start.addEventListener("click",()=>{
 submit.addEventListener("click",()=> {
     submit.classList.remove("show");
     submit.classList.add("hide");
+    timer.classList.add("hide");
     finalResult();
     localStorage.setItem("submitted",true);
 })
