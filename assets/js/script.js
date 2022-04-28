@@ -49,12 +49,17 @@ const start = document.querySelector(".start_btn"),
 submit = document.querySelector(".submit_btn"),
 previous = document.querySelector(".previous_btn"),
 next = document.querySelector(".next_btn"),
-back = document.querySelector(".previous_btn"),
+prev = document.querySelector(".previous_btn"),
 question_box = document.querySelector(".question_box"),
 options_box = document.querySelector(".options_box"),
 question_no = document.querySelector(".question-no"),
+timer = document.querySelector(".timer"),
 question_container = document.querySelector(".questions"),
-result = document.querySelector(".result_box");
+result = document.querySelector(".result_box"),
+back = document.querySelector(".back_btn"),
+start_time = 2,
+score = document.querySelector(".score");
+let time = start_time * 60;
 
 let question_counter = 0; 
 
@@ -62,6 +67,12 @@ const setAttributes = (element, attribute) => {
     Object.keys(attribute).forEach(e => {
         element.setAttribute(e, attribute[e]);
     });
+}
+
+const stop_timer = () => {
+    if(!(localStorage.getItem("submitted"))){
+    finalResult();
+    }
 }
 
 const showQuestion = () => {
@@ -91,28 +102,125 @@ const showQuestion = () => {
 
     question_box.innerHTML = `${questions[question_counter].question}`; 
     question_no.innerHTML = `${question_counter+1}/10`
+    label = document.querySelectorAll("label");
+    label.forEach(i=>{
+        i.addEventListener("click",()=>{
+            let value = {"question": question_counter+1,"answer": i.innerText};
+            answers.push(value);
+        })
+    })
+    
+    
+}
+
+const checkAttemped = () => {
+    console.log(answers);
+    if(answers != "") {
+        for(let i = 0; i < answers.length; i++) {
+            if(answers[i].question === question_counter+1) {
+                let option = document.querySelectorAll(".option");
+                console.log(option);
+                option.forEach(j => {
+                    if(j.value === answers[i].answer) {
+                        j.checked = true;
+                    }
+                });
+            }
+        }
+    }
+
+}
+
+const finalResult = () => {
+    question_container.classList.add("hide");
+    result.classList.add("show");
+    let score_count = 0;
+    answers.forEach(i=>{
+        questions.forEach(j=>{
+            if(i.answer === j.answer) {
+                score_count++;
+            }
+        })
+        
+    })
+    // for(let i = 0; i < questions.length; i++) {
+    //     for(let j = 0; j < answers.length; j++) {
+    //         if(i === answers[j].question_counter-1) {
+    //             if(questions[i].answer === answers[j].answer) {
+    //                 score_count += 1;
+    //             }
+    //         }
+    //     }
+    // }
+    score.innerText = `Your Score is ${score_count}`;
+ 
+
 }
 
 const nextQuestion = () => {
     question_counter++;
+    prev.disabled=false;
     showQuestion();
+    if(question_counter === questions.length-1) {
+        next.disabled = true;
+        submit.classList.add("show");
+    }
+    checkAttemped();
 }
 
 const prevQuestion = () => {
     question_counter--;
+    next.disabled=false;
     showQuestion();
+    if(question_counter === 0) {
+        prev.disabled = true;
+    }
+    checkAttemped();
 }
 
 next.addEventListener("click",()=>{
     nextQuestion();
 })
 
-back.addEventListener("click",()=>{
+prev.addEventListener("click",()=>{
     prevQuestion();
 })
 
+start.addEventListener("click",()=>{
+    start.classList.add("hide");
+   let time_duration = setInterval(()=>{
+       time--;
+    let minutes = Math.floor(time/60),
+    seconds = time % 60;
+    timer.innerHTML = `${minutes}:${seconds}`
+   },1000);
+   time_duration;
+   setTimeout(() => {
+    stop_timer();
+},4000);
+  
+})
+
+submit.addEventListener("click",()=> {
+    submit.classList.remove("show");
+    submit.classList.add("hide");
+    finalResult();
+    localStorage.setItem("submitted",true);
+})
+
+back.addEventListener("click",()=>{
+    document.location.reload();
+    // start.classList.add("show");
+    // question_container.classList.add("show");
+    // result.classList.remove("show");
+    // result.classList.add("hide");
+})
+
+
+
 window.onload = () =>{
     showQuestion();
+    prev.disabled=true;
 }
 
 
