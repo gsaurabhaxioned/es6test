@@ -120,6 +120,11 @@ li {
   main styling starts here
 =================================*/
 
+main .wrapper {
+  padding-bottom: 25px;
+  background-color: #deb887;
+}
+
 .heading {
   padding: 20px;
   background-color: #000;
@@ -166,9 +171,23 @@ input[type = "radio"]:checked + label {
   background-color: #000;
 }
 
+.start-info {
+   width: 25%;
+   margin: 10px auto;
+   background-color: #00ffff;
+   text-align: center;
+}
+
 button {
   width: 8%;
-  height: 30px;
+  padding: 5px;
+  background: #000;
+  color: #fff;
+  border-radius: 8px;
+}
+
+button:disabled {
+  background-color: #808080;
 }
 
 .start_btn,.submit_btn {
@@ -185,7 +204,7 @@ button {
   text-align: center;
 }
 
-.score {
+.result_box span {
   margin-bottom: 20px;
   display: block;
   font-size: 20px;
