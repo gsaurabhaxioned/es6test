@@ -125,14 +125,14 @@ const showQuestion = () => {
                 "answer": i.innerText
             };
             let repeat = false;
-            answers.forEach(j=> {
-                if(j.question === value.question) {
+            answers.forEach(j => {
+                if (j.question === value.question) {
                     repeat = true;
                 }
             })
-            if(!repeat) {
+            if (!repeat) {
                 answers.push(value);
-            }          
+            }
         })
     })
 }
