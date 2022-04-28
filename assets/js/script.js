@@ -54,7 +54,15 @@ question_box = document.querySelector(".question_box"),
 question_container = document.querySelector(".questions"),
 result = document.querySelector(".result_box");
 
+const startQuestions = () => {
+    question_box.innerHTML = `${questions[0].question}`
+}
 
+start.addEventListener("click",()=>{
+    start.classList.add("hide");
+    startQuestions();
+    startCounter();
+})
 
 
 
