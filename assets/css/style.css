@@ -144,18 +144,26 @@ li {
 }
 
 .options_box {
-  width: 50%;
+  width: 55%;
   padding: 21px 0;
   margin: auto;
   display: flex;
   justify-content: space-between;
 }
 
-.options_box span {
+.options_box label {
+  width: 20%;
   padding: 5px;
-  background-image: linear-gradient(45deg, #ff0000,#0000ff);
+  background-color: #ff0000;
   color: #fff;
+  font-size: 12px;
   cursor: pointer;
+  white-space: nowrap;
+}
+
+
+input[type = "radio"]:checked + label {
+  background-color: #000;
 }
 
 button {
