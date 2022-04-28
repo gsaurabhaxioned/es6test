@@ -58,8 +58,12 @@ question_container = document.querySelector(".questions"),
 result = document.querySelector(".result_box"),
 back = document.querySelector(".back_btn"),
 start_time = 2,
-score = document.querySelector(".score");
-let time = start_time * 60;
+score = document.querySelector(".score"),
+total = document.querySelector(".total"),
+attemtps = document.querySelector(".attempts"),
+correct_answers = document.querySelector(".correct_answers");
+let buttons = document.querySelectorAll("button"),
+time = start_time * 60;
 
 let question_counter = 0; 
 
@@ -143,18 +147,19 @@ const finalResult = () => {
         })
         
     })
-    // for(let i = 0; i < questions.length; i++) {
-    //     for(let j = 0; j < answers.length; j++) {
-    //         if(i === answers[j].question_counter-1) {
-    //             if(questions[i].answer === answers[j].answer) {
-    //                 score_count += 1;
-    //             }
-    //         }
-    //     }
-    // }
-    score.innerText = `Your Score is ${score_count}`;
+    score.innerText = `Your Score is : ${(score_count * 100)/questions.length}`;
+    total.innerText = `Total questions : ${questions.length}`;
+    attemtps.innerText = `Questions_attempted: ${answers.length}`;
+    correct_answers.innerText= `Correct Answers: ${score_count}`;
  
 
+}
+
+const radioButtons = (val) => {
+    let radios = document.querySelectorAll("input[type='radio']");
+    radios.forEach(i=>{
+        i.disabled = val;
+    })
 }
 
 const nextQuestion = () => {
@@ -188,6 +193,8 @@ prev.addEventListener("click",()=>{
 
 start.addEventListener("click",()=>{
     start.classList.add("hide");
+    next.disabled = false;
+    radioButtons(false);
    let time_duration = setInterval(()=>{
        time--;
     let minutes = Math.floor(time/60),
@@ -219,15 +226,11 @@ back.addEventListener("click",()=>{
 
 
 window.onload = () =>{
-    showQuestion();
-    prev.disabled=true;
-}
-
-
-
-
-
-
+    showQuestion(); 
+    next.disabled = true;
+    prev.disabled = true;
+    radioButtons(true);
+    }
 
 
 
