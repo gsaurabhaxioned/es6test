@@ -51,17 +51,37 @@ previous = document.querySelector(".previous_btn"),
 next = document.querySelector(".next_btn"),
 back = document.querySelector(".back_btn"),
 question_box = document.querySelector(".question_box"),
+options_box = document.querySelector(".options_box"),
 question_container = document.querySelector(".questions"),
 result = document.querySelector(".result_box");
 
+let question_counter = 0; 
+
 const startQuestions = () => {
-    question_box.innerHTML = `${questions[0].question}`
+    options_box.innerHTML = "";
+    let option1 = document.createElement('span'),
+    optiontext1 = document.createTextNode(questions[question_counter].options[0]),
+    option2 = document.createElement('span'),
+    optiontext2 = document.createTextNode(questions[question_counter].options[1]),
+    option3 = document.createElement('span'),
+    optiontext3 = document.createTextNode(questions[question_counter].options[2]),
+    option4 = document.createElement('span'),
+    optiontext4 = document.createTextNode(questions[question_counter].options[3]);
+    option1.appendChild(optiontext1);
+    option2.appendChild(optiontext2);
+    option3.appendChild(optiontext3);
+    option4.appendChild(optiontext4);
+    options_box.appendChild(option1);
+    options_box.appendChild(option2);
+    options_box.appendChild(option3);
+    options_box.appendChild(option4);
+    question_box.innerHTML = `${questions[question_counter].question}`; 
 }
 
 start.addEventListener("click",()=>{
     start.classList.add("hide");
     startQuestions();
-    startCounter();
+    // startCounter();
 })
 
 
