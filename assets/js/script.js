@@ -86,6 +86,7 @@ const setAttributes = (element, attribute) => {
 
 //function for timeout
 const stop_timer = () => {
+    submit.classList.add("hide");
     if (!(localStorage.getItem("submitted"))) {
         finalResult("Time Up!!!!!!!!!!");
     }
@@ -123,7 +124,15 @@ const showQuestion = () => {
                 "question": question_counter + 1,
                 "answer": i.innerText
             };
-            answers.push(value);
+            let repeat = false;
+            answers.forEach(j=> {
+                if(j.question === value.question) {
+                    repeat = true;
+                }
+            })
+            if(!repeat) {
+                answers.push(value);
+            }          
         })
     })
 }
