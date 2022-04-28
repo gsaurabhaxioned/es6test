@@ -143,6 +143,17 @@ li {
   margin-bottom: 20px;
 }
 
+.options_box {
+  display: flex;
+  justify-content: space-between;
+}
+
+.options_box span {
+  padding: 5px;
+  background-color: linear-gradient(45deg, #ff0000,#0000ff);
+  color: #fff;
+}
+
 button {
   width: 8%;
   height: 30px;
