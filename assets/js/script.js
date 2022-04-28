@@ -139,12 +139,10 @@ const showQuestion = () => {
 
 //function to check if question is attempted
 const checkAttemped = () => {
-    console.log(answers);
     if (answers != "") {
         for (let i = 0; i < answers.length; i++) {
             if (answers[i].question === question_counter + 1) {
                 let option = document.querySelectorAll(".option");
-                console.log(option);
                 option.forEach(j => {
                     if (j.value === answers[i].answer) {
                         j.checked = true;
