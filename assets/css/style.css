@@ -120,10 +120,54 @@ li {
   main styling starts here
 =================================*/
 
+.heading {
+  padding: 20px;
+  background-color: #000;
+  color: #fff;
+  font-size: 30px;
+  text-align: center;
+}
 
+.counter {
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+}
 
+.questions {
+  padding: 10px;
+  text-align: center;
+}
 
+.question_box {
+  margin-bottom: 20px;
+}
 
+button {
+  width: 8%;
+  height: 30px;
+}
+
+.start_btn,.submit_btn {
+  margin: auto;
+  display: block;
+}
+
+.submit_btn {
+  display: none;
+}
+
+.result_box {
+  display: none;
+  text-align: center;
+}
+
+.score {
+  margin-bottom: 20px;
+  display: block;
+  font-size: 20px;
+  font-weight: bold;
+}
 
 
 
