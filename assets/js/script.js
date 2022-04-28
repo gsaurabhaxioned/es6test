@@ -62,7 +62,8 @@ start_time = 2,
 score = document.querySelector(".score"),
 total = document.querySelector(".total"),
 attemtps = document.querySelector(".attempts"),
-correct_answers = document.querySelector(".correct_answers");
+correct_answers = document.querySelector(".correct_answers"),
+result_heading = document.querySelector(".result-heading");
 let buttons = document.querySelectorAll("button"),
 time = start_time * 60;
 
@@ -137,6 +138,7 @@ const checkAttemped = () => {
 }
 
 const finalResult = (msg) => {
+    result_heading.innerText = msg;
     question_container.classList.add("hide");
     result.classList.add("show");
     let score_count = 0;
@@ -207,7 +209,7 @@ start.addEventListener("click",()=>{
    setTimeout(() => {
     timer.classList.add("hide");
     stop_timer();
-},4000);
+},10000);
   
 })
 
@@ -215,7 +217,7 @@ submit.addEventListener("click",()=> {
     submit.classList.remove("show");
     submit.classList.add("hide");
     timer.classList.add("hide");
-    finalResult();
+    finalResult("Successfully Submitted");
     localStorage.setItem("submitted",true);
 })
 
@@ -230,6 +232,7 @@ back.addEventListener("click",()=>{
 
 
 window.onload = () =>{
+    localStorage.clear();
     showQuestion(); 
     next.disabled = true;
     prev.disabled = true;
